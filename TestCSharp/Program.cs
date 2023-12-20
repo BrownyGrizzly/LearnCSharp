@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 class Program
@@ -32,8 +32,9 @@ class Program
                 Console.WriteLine("\nMenu:");
                 Console.WriteLine("1. View all students");
                 Console.WriteLine("2. Update student information");
-                Console.WriteLine("3. Delete student");
-                Console.WriteLine("4. Logout");
+                Console.WriteLine("3. Search by id");
+                Console.WriteLine("4. Delete student");
+                Console.WriteLine("5. Logout");
                 Console.Write("Enter your choice: ");
 
                 string choice = Console.ReadLine();
@@ -47,9 +48,12 @@ class Program
                         UpdateStudentInformation();
                         break;
                     case "3":
-                        DeleteStudent();
+                        SearchStudentById();
                         break;
                     case "4":
+                        DeleteStudent();
+                        break;
+                    case "5":
                         Logout();
                         break;
                     default:
@@ -62,6 +66,24 @@ class Program
         {
             Console.WriteLine("Login failed. Exiting program.");
         }
+    }
+
+    static void SearchStudentById()
+    {
+        Console.Write("Enter student ID to search: ");
+    int studentId = int.Parse(Console.ReadLine());
+
+    Student foundStudent = students.Find(s => s.StudentId == studentId);
+
+    if (foundStudent != null)
+    {
+        Console.WriteLine("\nStudent Information:");
+        Console.WriteLine(foundStudent.ToString());
+    }
+    else
+    {
+        Console.WriteLine($"Student with ID {studentId} not found.");
+    }
     }
 
     static bool Login(string username, string password, User user)
